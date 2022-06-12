@@ -1,0 +1,88 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/home-page.css">
+</head>
+<body>
+<%- include('../includes/navbar.ejs') %>
+<div class="row pt-5">
+    <div class="col-md-6 px-3">
+        <div class="w-100" id="slideshow">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade bg-dark" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    <% let count = 0; %>
+                    <% for(let imageUrl of product.imageUrls){ %>
+
+                        <div class="carousel-item <% if(count === 0){ %> active<% } %>">
+                            <img src="http://localhost:4000/<%= imageUrl %>"
+                                 class="rounded mx-auto my-auto d-block img-fluid"
+                                 style="height:40rem;object-fit: contain; overflow: hidden" alt="<%= count %>"
+                                 id="slideshow-image">
+                        </div>
+                        <% count++; %>
+                    <% } %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h1 class="h4 py-2 px-3"><%= product.title %></h1>
+        <hr>
+        <div class="row px-5">
+            <div class="col-md-8">
+                <h2 class="h2 pt-2 pb-3 secondary-color_text">Rs. <%= product.price %></h2>
+                <h3 class="h4
+<% if(product.isActive){ %>
+text-success
+<% }else{ %>
+text-danger<% } %>">
+                    <% if(product.isActive){ %>
+                        In Stock
+                    <% }else{ %>
+                        Out of Stock.
+                    <% } %>
+                </h3>
+            </div>
+            <div class="col-md-4">
+                <%- include('../includes/add-to-cart-button.ejs') %>
+            </div>
+        </div>
+        <hr>
+        <div class="details">
+            <h2 class="h5">About this item:</h2>
+            <p class="caption px-5" style="text-align: justify">
+                <%= product.description %>
+            </p>
+        </div>
+    </div>
+</div>
+<div class=" mx-auto col-md-4 justify-content-center p-5 text-center" id="properties">
+    <h2 class="h3">Additional Details:</h2>
+    <hr>
+    <table class="table table-hover">
+        <tbody>
+
+            <%for(let property of product.properties){%>
+            <tr>
+            <td class="fw-bold"><%=property.key%>:</td>
+            <td><%=property.value%></td>
+            </tr>
+            <%}%>
+
+        </tbody>
+    </table>
+
+</div>
+<%- include('../includes/footer.ejs') %>
+<%- include('../includes/js-imports.ejs') %>
+</body>
+</html>

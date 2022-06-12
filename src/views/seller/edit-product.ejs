@@ -1,0 +1,116 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+<%- include('../includes/navbar.ejs') %>
+
+<div class="rounded d-flex justify-content-center">
+    <div class="col-md-8 rounded col-sm-12 shadow-lg p-5 bg-light">
+        <div class="text-center">
+            <h1 class="h5"><%= documentTitle %></h1>
+        </div>
+        <form action="<%= action %>" method="post" enctype="multipart/form-data">
+            <input type="hidden" value="<%= product._id %>" name="id">
+            <div class="p-4">
+                <div class="input-group mb-3">
+    <span class="input-group-text">
+        <label for="title" class="text-dark">Title</label>
+    </span>
+                    <input type="text" id="title" class="form-control" placeholder="title" name="title"
+                           value="<%= product.title %>" required>
+                </div>
+                <div class="input-group mb-3">
+    <span class="input-group-text">
+        <label for="category" class="text-dark">Category</label>
+    </span>
+                    <input type="text" class="form-control" placeholder="Select Category" name="category"
+                           list="category" value="<%= product.category %>" required/>
+                    <datalist id="category">
+                        <% categories.forEach(category=>{ %>
+                            <option
+                            <% if(category === product.category){ %> selected
+                                    <% } %>
+                            > <%= category %></option>
+                        <% }); %>
+                    </datalist>
+
+                </div>
+                <div class="input-group col-md-6 mb-3">
+    <span class="input-group-text">
+        <label for="price" class="text-dark">Price</label>
+    </span>
+                    <input type="number" id="price" class="form-control" placeholder="price" name="price"
+                           value="<%= product.price %>" required>
+                    <span class="input-group-text text-dark bg-light">
+                                   PKR
+                               </span>
+                </div>
+                <div class="input-group col-md-6 mb-3">
+    <span class="input-group-text">
+        <label for="quantity" class="text-dark">Quantity</label>
+    </span>
+                    <input type="number" id="quantity" class="form-control" placeholder="quantity" name="quantity"
+                           value="<%= product.quantity %>" required>
+                </div>
+                <div class="properties">
+                    <h2 class="h3">Add Properties</h2>
+                    <div class="text-end">
+                        <button type="button" id="add-property" class="btn btn-secondary"> Add new</button>
+                    </div>
+                    <div class="properties">
+                        <div class="row row-cols-2 mb-3">
+                            <div class="col" id="keys">
+                                <label> Name: </label>
+                                <% if(product.properties.length > 0){ %>
+                                    <% for(let i = 0; i < product.properties.length; i++){ %>
+                                        <input type="text" class="form-control mb-3" placeholder="color"
+                                               value="<%= product.properties[i].key %>"
+                                               name="key<%= i %>">
+                                <% }} %>
+                            </div>
+                            <div class="col" id="values">
+                                <label> Value: </label>
+                                <% if(product.properties.length > 0){ %>
+                                    <% for(let i = 0; i < product.properties.length; i++){ %>
+                                        <input type="text" class="form-control mb-3" placeholder="Red"
+                                               value="<%= product.properties[i].value %>"
+                                               name="value<%= i %>">
+                                <% }} %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+    <span class="input-group-text">
+        <label for="description" class="text-dark">Details</label>
+    </span>
+                    <textarea id="description" rows="8" class="form-control" placeholder="Add details here"
+                              name="description" required><%= product.description %></textarea>
+                </div>
+
+                <div class="imagesInput">
+                    <h2 class="h5 text-center">Images</h2>
+                    <div class="image text-center" id="image-display">
+                        <% if (product.imageUrls.length > 0){ %>
+                            <% for(let imageUrl of product.imageUrls){ %>
+                                <img src="http://localhost:4000/<%= imageUrl %>" id="selected-image" height="200"
+                                     width="200" class="m-2 rounded">
+                        <% }} %>
+                    </div>
+                    <input class="form-control form-control-sm" id="image-input" type="file" name="image"
+                           multiple="multiple" accept="image/*" <% if(action === "/add-product"){ %>required
+                            <% } %>
+                    >
+                </div>
+                <button type="submit" class="btn btn-secondary w-100 mt-3"><%= documentTitle %></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include('../includes/js-imports.ejs') %>
+
+<!--custom js-->
+<script src="/js/read-file.js"></script>
+<script src="/js/add-property-form.js"></script>
+</body>
+</html>

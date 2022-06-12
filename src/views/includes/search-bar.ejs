@@ -1,0 +1,50 @@
+<div class="wallpaper container card d-flex shadow justify-content-center p-5">
+    <%-include('./error-message.ejs')%>
+    <%-include('./success-message.ejs')%>
+    <h1 class="h3">Discover everything for everyone</h1>
+    <div class="form">
+        <form action="/search" method="post">
+            <div class="row">
+               <div class="col-md-3 my-2">
+                   <select id="category" name="category" form="category" class="form-control">
+                       <option selected disabled hidden value="-1">All</option>
+                       <%categories.forEach(category=>{%>
+                       <option value="<%=category%>"><%=category%></option>
+                       <%});%>
+                   </select>
+               </div>
+
+                <div class="col-md-7 my-2">
+                    <input type="search" class="form-control" placeholder="search item here" name="search" value="<%= oldInput.search %>">
+                </div>
+                <div class="col-md-2 my-2">
+                    <button type="submit" class="form-control btn btn-primary">Search</button>
+                </div>
+            </div>
+            <div id="advance-options" class="container  my-2">
+                <a class="hyperlink-secondary" data-bs-toggle="collapse" href="#advance-options-input" role="button" aria-expanded="false" aria-controls="advance-options-input">
+                    Advance Options
+                </a>
+                <div class="collapse" id="advance-options-input">
+                    <div class="row">
+                        <div class="col-md-6  my-2">
+                            <h2 class="h5 text-center">Price</h2>
+                            <div class="row">
+                                <div class="col-md-6 my-2">
+                                    <input type="number" name="minPrice" class="form-control" placeholder="min">
+                                </div>
+                                <div class="col-md-6  my-2">
+                                    <input type="number" name="maxPrice" class="form-control" placeholder="max">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6  my-2">
+                            <h2 class="h5">Key words</h2>
+                            <input type="text" class="form-control" name="keywords" placeholder="key1, key2, key3 etc.">
+                        </div>
+                    </div>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<form action="/add-to-cart" method="post">
+    <div class="form-group my-2">
+        <label for="#quantity">Qty:</label>
+        <select id="quantity" aria-label="select quantity">
+            <option selected>1</option>
+            <%for(let i = 2; i <= product.quantity; i++){%>
+                <option><%=i%></option>
+            <%}%>
+        </select>
+    </div>
+    <input type="hidden" name="id" value="<%=product._id%>">
+    <button class="btn btn-secondary btn-lg" type="submit">
+        <i class="bi bi-cart-plus-fill"></i>  Add to Cart
+    </button>
+</form>

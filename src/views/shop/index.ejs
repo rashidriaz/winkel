@@ -1,0 +1,40 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/home-page.css">
+</head>
+<body>
+<%- include('../includes/navbar.ejs') %>
+<div class="container-fluid p-5 justify-content-center m-0 bg-dark vh-100 d-flex align-items-center" id="cover">
+    <%- include('../includes/search-bar.ejs') %>
+</div>
+<div class="container my-5" id="products-section">
+    <% categories.forEach(category=>{ %>
+        <% const products = productsByCategories[category]; %>
+        <% if (products.length > 0){ %>
+        <div class="row">
+            <div class="col-md-10"><h2 class="h3">Products in "<%= category %>":</h2></div>
+            <div class="col-md-2"><a href="/products?category=<%=category%>" class="">View All</a></div>
+        </div>
+
+            <div class="row row-cols-1 row-cols-md-4 g-4 d-flex py-5 justify-content-center">
+                <% products.forEach(product=>{ %>
+                    <div class="col">
+                        <div class="card mx-1 mb-3 shadow-sm rounded" style="height: 25rem;">
+                            <a href="/products/<%= product._id %>" class="stretched-link"></a>
+                            <img src="<%= product.imageUrl %>" height="225rem" width="225rem" class="card-img-top p-3"
+                                 alt="<%= product.title %>">
+                            <div class="card-body">
+                                <h2 class="card-title h6"
+                                    style="height: 100px; overflow: scroll"><%= product.title %></h2>
+                                <h3 class="card-text h3 secondary-color_text fw-bold">Rs. <%= product.price %></h3>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    <% }); %>
+</div>
+<%- include('../includes/footer.ejs') %>
+<%- include('../includes/js-imports.ejs') %>
+</body>
+</html>

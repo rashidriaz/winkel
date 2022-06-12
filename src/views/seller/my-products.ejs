@@ -1,0 +1,47 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/home-page.css">
+</head>
+<body>
+<%- include('../includes/navbar.ejs') %>
+<div class="container-fluid p-5 m-0" id="title">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="h2">My Products</h1>
+        </div>
+        <div class="col-md-4">
+            <a href="/seller/add-product" class="btn btn-lg btn-secondary">Add new Product</a>
+        </div>
+    </div>
+    <hr>
+</div>
+<div class="container my-5" id="products-section">
+    <div class="row row-cols-1 row-cols-md-4 g-4 d-flex py-5 justify-content-center">
+        <% if(products.length === 0){ %>
+            <div class="text-center p-5">
+                <h1 class="h3">Nothing to show here!</h1>
+            </div>
+        <% }else{ %>
+            <% products.forEach(product=>{ %>
+                <div class="col">
+                    <div class="card mx-1 mb-3 shadow-sm rounded" style="height: 25rem;">
+                        <div class="image h-50">
+                        <img src="http://localhost:4000/<%= product.imageUrl %>"
+                             style="object-fit: scale-down; height: 100%; width: 100%" class="card-img-top p-3"
+                             alt="<%= product.title %>">
+                        </div>
+                        <div class="card-body h-75 mb-2">
+                            <h2 class="card-title h6"
+                                style="height: 50%; overflow: scroll"><%= product.title %></h2>
+                            <h3 class="card-text h3 h-25 secondary-color_text fw-bold">Rs. <%= product.price %></h3>
+                            <a href="/seller/edit-product/<%= product._id %>" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+</div>
+<%- include('../includes/footer.ejs') %>
+<%- include('../includes/js-imports.ejs') %>
+</body>
+</html>

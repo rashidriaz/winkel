@@ -1,0 +1,24 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body class="primary-color_background">
+<div class="container-fluid vh-100" style="margin-top:100px">
+    <%-include('./includes/form-opening.ejs')%>
+    <%-include('../includes/error-message.ejs')%>
+    <%-include('../includes/success-message.ejs')%>
+                        <%-include('./includes/email-input-field.ejs')%>
+                        <%-include('./includes/password-input-field.ejs')%>
+                        <button class="btn btn-secondary w-100 text-center mt-2" type="submit">
+                            Login
+                        </button>
+                        <p class="text-center mt-5">Don't have an account?
+                            <a class="primary-color_text" href="/signup">Sign Up</a>
+                        </p>
+                        <a class="text-center primary-color_text" href="/forget-password" style="display: block">
+                            Forgot your password?</a>
+    <%-include('./includes/form-closing.ejs')%>
+</div>
+</body>
+
+</html>
