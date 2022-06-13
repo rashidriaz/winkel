@@ -1,6 +1,7 @@
 <%- include('../includes/head.ejs') %>
 <!-- Default styling. Feel free to remove! -->
 <link href="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css" rel="stylesheet">
+
 </head>
 <body>
 <%- include('../includes/navbar.ejs') %>
@@ -12,22 +13,22 @@
         </div>
         <form action="<%= action %>" method="post" class="prose flex flex--column">
             <input type="hidden" name="id" value="<%= oldInput._id %>">
-            <input class="input mb12" name="street" value="<%= oldInput.street %>" autocomplete="shipping
+            <input class="input my-2 form-control" name="street" value="<%= oldInput.street %>" autocomplete="shipping
                        address-line1" placeholder="Street" type="text" required>
 
-            <input class="input mb12" name="apartment" value="<%= oldInput.apartment %>" autocomplete="shipping
+            <input class="input my-2  form-control" name="apartment" value="<%= oldInput.apartment %>" autocomplete="shipping
                    address-line2" placeholder="Apartment" type="text"  required>
             <div class="flex">
-                <input class="input mb12" value="<%= oldInput.city %>" name="city"
+                <input class="input my-2 form-control" value="<%= oldInput.city %>" name="city"
                        autocomplete="shipping address-level2" placeholder="City" type="text"  required>
-                <input class="input mb12 ml6" value="<%= oldInput.state %>" name="state"
+                <input class="input my-2 ml6 form-control" value="<%= oldInput.state %>" name="state"
                        autocomplete="shipping address-level1" placeholder="State" type="text"  required>
-                <input class="input mb12 ml6" value="<%= oldInput.country %>" name="country"
+                <input class="input my-2 ml6 form-control" value="<%= oldInput.country %>" name="country"
                        autocomplete="shipping country" placeholder="Country" type="text"  required>
-                <input class="input mb12 ml6" value="<%= oldInput.zipCode %>" name="zipCode"
+                <input class="input my-2 ml6 form-control" value="<%= oldInput.zipCode %>" name="zipCode"
                        autocomplete="shipping postal-code" placeholder="ZIP / Postcode" type="number"  required>
             </div>
-            <button class="btn btn-primary btn-lg w-100" type="submit"><%= documentTitle %></button>
+            <button class="btn btn-primary w-100" type="submit"><%= documentTitle %></button>
         </form>
     </div>
     <div class="map" id="gmp-map"></div>
