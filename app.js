@@ -3,7 +3,7 @@ const Express = require("express");
 const BodyParser = require("body-parser");
 const Flash = require("connect-flash")
 const session = require("express-session");
-const Helmet = require("helmet");
+// const Helmet = require("helmet");
 const Compression = require("compression");
 const Morgan = require("morgan");
 const fs = require("fs");
@@ -48,7 +48,7 @@ app.use(session({
 app.use(FetchSessionUser);
 app.use(FileUpload());
 app.use(Flash());
-app.use(Helmet({contentSecurityPolicy: false,}));
+// app.use(Helmet({contentSecurityPolicy: false,}));
 app.use(Compression());
 app.use(Express.static(path.join(__dirname, 'src/public')));
 app.use(Express.static(path.join(__dirname, 'images')));
