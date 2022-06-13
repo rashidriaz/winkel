@@ -3,7 +3,7 @@ const mailClient = require("../clients/mail-client");
 function generateMailBody(mailData){
   return `
     <div style="margin: auto; width: 100%; text-align: center">
-        <h1>Winkel</h1>
+        <img src="https://winkel-app.herokuapp.com/images/logo.png" height="50px" width="50px">
         <h3>${mailData.title}</h3>
     </div>
     <hr>
@@ -24,7 +24,7 @@ function generateMailBody(mailData){
     `;
 }
 module.exports.sendResetPasswordMail = (mailData, callback)=>{
-  mailData.url = "http://localhost:4000/reset-password/" + mailData.token;
+  mailData.url = process.env.URL + mailData.token;
   console.log(mailData.token);
   mailData.title = "Password Reset";
   mailData.contentTitle = "Forgot your Password?";
@@ -39,7 +39,7 @@ module.exports.sendResetPasswordMail = (mailData, callback)=>{
 }
 
 module.exports.sendEmailIdVerificationMail = (mailData, callback)=>{
-  mailData.url = "http://localhost:4000/email-verification/" + mailData.token;
+  mailData.url = process.env.URL  + mailData.token;
   console.log(mailData.token);
   mailData.title = "Thank You for signing up";
   mailData.contentTitle = "Welcome to Winkel";

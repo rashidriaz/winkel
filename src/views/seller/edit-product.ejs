@@ -100,7 +100,7 @@
                     <div class="image text-center" id="image-display">
                         <% if (product.imageUrls.length > 0){ %>
                             <% for(let imageUrl of product.imageUrls){ %>
-                                <img src="https://winkel-app.herokuapp.com/<%= imageUrl %>" id="selected-image" height="200"
+                                <img src="<%=url%><%= imageUrl %>" id="selected-image" height="200"
                                      width="200" class="m-2 rounded">
                         <% }} %>
                     </div>

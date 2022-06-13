@@ -1,4 +1,3 @@
-const {response} = require("express");
 
 
 module.exports.renderShopHomePage = (request, response) => {

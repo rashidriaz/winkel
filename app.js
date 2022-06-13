@@ -56,6 +56,7 @@ app.use(dbNotConnected);
 
 app.use((request, response, next) => {
   response.locals.isLoggedIn = request.session.isLoggedIn;
+  response.locals.url = process.env.URL;
   response.locals.error = extractFlashMessage(request, "error");
   response.locals.success = extractFlashMessage(request, "success");
   next();
