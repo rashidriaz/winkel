@@ -19,7 +19,7 @@
                     <% for(let imageUrl of product.imageUrls){ %>
 
                         <div class="carousel-item <% if(count === 0){ %> active<% } %>">
-                            <img src="http://localhost:4000/<%= imageUrl %>"
+                            <img src="<%= imageUrl %>"
                                  class="rounded mx-auto my-auto d-block img-fluid"
                                  style="height:40rem;object-fit: contain; overflow: hidden" alt="<%= count %>"
                                  id="slideshow-image">
