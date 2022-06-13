@@ -1,0 +1,68 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/home-page.css">
+</head>
+<body>
+<%- include('../includes/navbar.ejs') %>
+<div class="container-fluid p-5 text-center m-0 bg-dark d-flex" id="title">
+    <h1 class="h2 text-light">My Orders History</h1>
+</div>
+<div class="container my-5" id="products-section">
+    <div class="row g-4 py-5 justify-content-center">
+        <% if(orders.length === 0){ %>
+            <div class="text-center p-5">
+                <h1 class="h3">Nothing to show here!</h1>
+            </div>
+        <% }else{ %>
+            <% orders.forEach(order=>{ %>
+            <div class="m-2 p-3 card rounded border shadow">
+                <h2 class="h4 my-2">Tracking ID: <%= order._id %></h2>
+                <hr>
+                <div class="products p-2">
+                    <table class="table table-bordered text-center">
+                        <tbody>
+                        <thead>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        </thead>
+                        <% order.items.forEach(item=>{ %>
+                            <% let totalItemValue = item.price * item.quantity; %>
+                            <tr>
+
+                                <td>
+                                    <img src="<%= item.imageUrl %>"
+                                         height="100px" width="100px" class="m-3" alt="<%= item.title %>">
+                                </td>
+                                <td><h2 class="text-dar h6"><%= item.title %></h2></td>
+                                <td><%= item.price %></td>
+                                <td>x <%= item.quantity %></td>
+                                <td><%= totalItemValue %></td>
+                            </tr>
+
+                        <% }); %>
+                        <tr>
+                            <td colspan="2" class="text-end"></td>
+                            <td colspan="2"><h3 class="h4">Total:</h3></td>
+                            <td><%= order.totalPrice %></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div class="address-bar text-end">
+                    <span><h3 class="h5" style="display: inline">Delivered At:  </h3>
+                        <p class="caption " style="display: inline"><%= order.shippingAddress %></p>
+                    </span>
+                </div>
+            </div>
+            <% }); %>
+        <% } %>
+    </div>
+</div>
+<%- include('../includes/footer.ejs') %>
+<%- include('../includes/js-imports.ejs') %>
+</body>
+</html>

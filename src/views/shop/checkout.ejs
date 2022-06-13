@@ -1,0 +1,78 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/home-page.css">
+</head>
+<body>
+<%- include('../includes/navbar.ejs') %>
+<div class="container-fluid p-5 text-center m-0 bg-dark d-flex" id="title">
+    <h1 class="h2 text-light">Checkout</h1>
+</div>
+<div class="row p-5 row-cols-2">
+    <div class="col">
+        <table class="table table-bordered text-center">
+            <tbody>
+            <thead>
+            <th>#</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            </thead>
+            <% let totalCartValue = 0; %>
+            <% cart.items.forEach(item=>{ %>
+                <% let totalItemValue = item.price * item.cartQuantity; %>
+                <% totalCartValue += totalItemValue; %>
+                <tr>
+
+                    <td>
+                        <img src="<%= item.imageUrl %>"
+                             height="100px" width="100px" class="m-3" alt="<%= item.title %>">
+                    </td>
+                    <td><h2 class="text-dar h6"><%= item.title %></h2></td>
+                    <td><%= item.price %></td>
+                    <td>x <%= item.cartQuantity %></td>
+                    <td><%= totalItemValue %></td>
+                </tr>
+
+            <% }); %>
+            <tr>
+                <td colspan="2" class="text-end"></td>
+                <td colspan="2"><h3 class="h4">Total:</h3></td>
+                <td><%= totalCartValue %></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col border border p-2">
+        <h2 class="h3 py-2">Select Shipping Address: </h2>
+        <hr>
+        <form action="/post-order" method="post">
+            <table class="table text-start w-75 mx-auto">
+                <tbody>
+                <%let count = 0;%>
+                <% addressBook.forEach(address=>{ %>
+                    <tr>
+                        <td><input class="form-check-input" type="radio" name="addressID" value="<%= address._id %>" <%if(count===0){%>
+                                    checked<%}%>>
+                            <%count++%>
+                        </td>
+                        <td><%= address.apartment %>, <%= address.street %> <br> <%= address.city %>
+                            , <%= address.state %>
+                            , <%= address.country %>
+                            - <%= address.zipCode %>
+                        </td>
+
+                    </tr>
+
+                <% }); %>
+                </tbody>
+            </table>
+            <button class="btn btn-secondary btn-lg w-100">Place Order</button>
+        </form>
+    </div>
+</div>
+
+<%- include('../includes/footer.ejs') %>
+<%- include('../includes/js-imports.ejs') %>
+</body>
+</html>

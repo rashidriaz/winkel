@@ -15,7 +15,7 @@ module.exports.isAuthenticated = (request, response, next) => {
 
 module.exports.isNotAuthenticated = (request, response, next) => {
   if (!isAuth(request.session)) {
-     next();
+    next();
   } else {
     response.redirect("/");
   }
@@ -51,6 +51,9 @@ module.exports.checkConfirmPassword = (request, response, next) => {
   const confirmPassword = request.body.confirmPassword;
   if (password !== confirmPassword) {
     request.flash("error", "Passwords do not match");
+    if (request.body.token) {
+      return response.redirect("/reset-password/" + request.body.token);
+    }
     return response.redirect("/signup");
   }
   next();
@@ -58,7 +61,7 @@ module.exports.checkConfirmPassword = (request, response, next) => {
 
 module.exports.checkPasswordLength = (request, response, next) => {
   const password = request.body.password;
-  if (password.length < 8){
+  if (password.length < 8) {
     request.flash("error", "Password must be at least 8 characters long");
     return response.redirect("/signup");
   }

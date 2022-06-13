@@ -1,4 +1,4 @@
-const Category = require("../../modals/category");
+const Category = require("../../models/category");
 
 async function handleException(callback){
   try{

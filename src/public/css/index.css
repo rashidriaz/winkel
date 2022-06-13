@@ -61,3 +61,8 @@ textarea{
 #slideshow-image:hover{
     transform: scale(1.5);
 }
+
+.product-card:hover{
+    transform: scale(1.1);
+    transition: ease;
+}

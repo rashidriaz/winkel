@@ -1,4 +1,4 @@
-const Property = require("../../modals/property");
+const Property = require("../../models/property");
 
 async function handleException(callback) {
   try {

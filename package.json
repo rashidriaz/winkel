@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "MONGO_USER=rashidriaz MONGO_PASSWORD=1passwordhai MONGO_DEFAULT_DB=winkel MAIL_CLIENT_API_KEY=54f8758b83eabb54c59db7ca3840c9ff-50f43e91-06f219e7 MAIL_CLIENT_DOMAIN=sandbox25410413ec16415682d7a47654cc9f64.mailgun.org node app.js",
+    "start-server": "node app.js",
+    "start:dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^3.1.1",
     "csurf": "^1.11.0",
@@ -34,9 +37,12 @@
     "express-session": "^1.17.3",
     "express-validator": "^6.14.1",
     "form-data": "^4.0.0",
+    "helmet": "^5.1.0",
     "mailgun-js": "^0.6.7",
     "mongoose": "^6.3.4",
+    "morgan": "^1.10.0",
     "multer": "^1.4.4-lts.1",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "save": "^2.5.0"
   }
 }

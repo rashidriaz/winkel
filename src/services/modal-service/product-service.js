@@ -1,4 +1,4 @@
-const Product = require("../../modals/product");
+const Product = require("../../models/product");
 const PropertyValueService = require("./property-value-service");
 
 async function handleException(callback) {
@@ -11,7 +11,6 @@ async function handleException(callback) {
 }
 
 async function getProducts(filter, fields, limit) {
-  filter.isActive = true;
   return handleException(async () => {
     if (limit) {
       return Product.find(filter, fields).limit(limit);
@@ -64,11 +63,11 @@ module.exports.getProduct = async (filter, populateProperties) => {
 }
 
 module.exports.getAllProducts = async (userID) => {
-  return getProductProperties(await getProducts({userID: {$ne: userID}}));
+  return getProductProperties(await getProducts({userID: {$ne: userID}, isActive: true}));
 
 }
 module.exports.getAllProductsForLoggedInUser = async (userID, fields) => {
-  const products = await getProducts({userID: userID}, fields);
+  const products = await getProducts({userID: userID, isActive: true}, fields);
 
   return products.map(product => {
     return {
@@ -112,9 +111,9 @@ module.exports.getProductOverviewDataByCategory = async (category, userID) => {
   });
 
 }
-module.exports.deleteProduct = async productID => {
+module.exports.deleteProduct = async (productID, userID) => {
   return handleException(async () => {
-    const product = await Product.findById(productID);
+    const product = await Product.findById({_id: productID, userID: userID});
     if (product.isActive) {
       product.isActive = false;
       await product.save();

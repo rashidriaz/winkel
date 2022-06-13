@@ -19,6 +19,10 @@ const UserSchema = new Schema({
     type: Boolean,
     required: true
   },
+  cart: {
+    type: Schema.Types.ObjectId,
+    ref: "Cart"
+  },
   emailVerificationToken: String,
   resetPasswordToken: String,
   resetPasswordTokenExpiration: Date,

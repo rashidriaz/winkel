@@ -83,14 +83,12 @@ module.exports.postNewPassword = async (request, response) => {
     const passwordMatched = await user.comparePassword(password);
     if (passwordMatched) {
       request.flash("error", "New password can not be same as old password");
-      const userData = {id: request.body.userID, token: passwordToken};
-      return response.render("/new-password/" + passwordToken);
+      return response.redirect("/reset-password/" + passwordToken);
     }
     const passwordUpdated = await UserService.resetUserPassword(user, password);
     if (!passwordUpdated) {
       request.flash("error", "Something went wrong please try again");
-      const userData = {id: request.body.userID, token: passwordToken};
-      return response.render("/new-password/" + passwordToken);;
+      return response.redirect("/reset-password/" + passwordToken);;
     }
     response.redirect("/login");
   });

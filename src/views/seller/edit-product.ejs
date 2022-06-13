@@ -1,4 +1,6 @@
 <%- include('../includes/head.ejs') %>
+<script src="https://cdn.tiny.cloud/1/h86vxz52r8m3lpj3tq5j1sfd4h4d7so7odz99y23x9743m66/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
 </head>
 <body>
 <%- include('../includes/navbar.ejs') %>
@@ -8,6 +10,14 @@
         <div class="text-center">
             <h1 class="h5"><%= documentTitle %></h1>
         </div>
+        <% if(action === "/seller/edit-product"){ %>
+        <div class="py-3 container">
+            <form action="/delete-product" method="post">
+                <input type="hidden" name="id" value="<%= product._id %>">
+                <button type="submit" class="btn btn-danger btn-lg">Delete Product</button>
+            </form>
+        </div>
+        <% } %>
         <form action="<%= action %>" method="post" enctype="multipart/form-data">
             <input type="hidden" value="<%= product._id %>" name="id">
             <div class="p-4">
@@ -79,12 +89,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="input-group mb-3">
-    <span class="input-group-text">
-        <label for="description" class="text-dark">Details</label>
-    </span>
-                    <textarea id="description" rows="8" class="form-control" placeholder="Add details here"
-                              name="description" required><%= product.description %></textarea>
+                <div class="mb-3">
+                    <textarea id="description" rows="8" style="width:100%;" class="form-control"
+                              placeholder="Add details here"
+                              name="description"><%= product.description %></textarea>
                 </div>
 
                 <div class="imagesInput">
@@ -112,5 +120,15 @@
 <!--custom js-->
 <script src="/js/read-file.js"></script>
 <script src="/js/add-property-form.js"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+    });
+</script>
 </body>
 </html>

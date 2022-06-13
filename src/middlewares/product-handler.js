@@ -21,7 +21,7 @@ module.exports.fetchProducts = async (request, response, next) => {
 }
 module.exports.fetchProduct = async (request, response, next) => {
   const productID = request.params.id;
-  request.product = await ProductService.getProduct({_id: productID}, true);
+  request.product = await ProductService.getProduct({_id: productID, isActive: true}, true);
   return next();
 }
 
@@ -33,7 +33,7 @@ module.exports.fetchEditProduct = async (request, response, next) => {
   const isGetRequest = request.method === "GET";
   const productID = isGetRequest? request.params.id : request.body.id;
   const userID = request.session.userID;
-  const product = await ProductService.getProduct({_id: productID, userID: userID}, isGetRequest);
+  const product = await ProductService.getProduct({_id: productID, userID: userID, isActive: true}, isGetRequest);
   if (product) {
     request.product = product;
     return next();

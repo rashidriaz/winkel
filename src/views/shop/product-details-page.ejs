@@ -3,6 +3,12 @@
 </head>
 <body>
 <%- include('../includes/navbar.ejs') %>
+<% if(error || success){ %>
+    <div class="p-5 text-center">
+        <%- include("../includes/error-message.ejs") %>
+        <%- include("../includes/success-message.ejs") %>
+    </div>
+<% } %>
 <div class="row pt-5">
     <div class="col-md-6 px-3">
         <div class="w-100" id="slideshow">
@@ -60,7 +66,7 @@ text-danger<% } %>">
         <div class="details">
             <h2 class="h5">About this item:</h2>
             <p class="caption px-5" style="text-align: justify">
-                <%= product.description %>
+                <%- product.description %>
             </p>
         </div>
     </div>
@@ -71,12 +77,12 @@ text-danger<% } %>">
     <table class="table table-hover">
         <tbody>
 
-            <%for(let property of product.properties){%>
-            <tr>
-            <td class="fw-bold"><%=property.key%>:</td>
-            <td><%=property.value%></td>
-            </tr>
-            <%}%>
+        <% for(let property of product.properties){ %>
+        <tr>
+            <td class="fw-bold"><%= property.key %>:</td>
+            <td><%= property.value %></td>
+        </tr>
+        <% } %>
 
         </tbody>
     </table>

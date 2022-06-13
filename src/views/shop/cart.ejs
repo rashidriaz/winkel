@@ -1,0 +1,62 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/home-page.css">
+</head>
+<body>
+<%- include('../includes/navbar.ejs') %>
+<div class="container-fluid p-5 text-center m-0 bg-dark d-flex" id="title">
+    <h1 class="h2 text-light">My Cart</h1>
+</div>
+<div class="container my-5" id="products-section">
+    <div class="row row-cols-1 row-cols-md-4 g-4 d-flex py-5 justify-content-center">
+        <% if(cart.items.length === 0){ %>
+            <div class="text-center p-5">
+                <h1 class="h3">Nothing to show here!</h1>
+            </div>
+        <% }else{ %>
+            <table class="table table-bordered text-center">
+                <tbody>
+                <thead>
+                <th>#</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                </thead>
+                <% let totalCartValue = 0; %>
+                <% cart.items.forEach(item=>{ %>
+                    <% let totalItemValue = item.price * item.cartQuantity; %>
+                    <% totalCartValue += totalItemValue; %>
+                    <tr>
+
+                        <td>
+                            <img src="<%= item.imageUrl %>"
+                                 height="100px" width="100px" class="m-3" alt="<%= item.title %>">
+                        </td>
+                        <td class="fw-bold"><a href="/products/<%=item._id%>" class="text-dark"><%= item.title %></a></td>
+                        <td><%= item.price %></td>
+                        <td>x <%= item.cartQuantity %></td>
+                        <td><%= totalItemValue %></td>
+                        <td>
+                            <form action="/delete-cart-item" method="post">
+                                <input type="hidden" name="id" value="<%=item._id%>">
+                                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+
+                <% }); %>
+                <tr>
+                    <td colspan="2" class="text-end"><a href="/checkout" class="btn btn-secondary btn-lg">Checkout</a></td>
+                    <td colspan="2"><h3 class="h4">Total:</h3> </td>
+                    <td><%=totalCartValue%></td>
+
+                </tr>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+</div>
+<%- include('../includes/footer.ejs') %>
+<%- include('../includes/js-imports.ejs') %>
+</body>
+</html>
