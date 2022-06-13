@@ -1,6 +1,6 @@
 const mailClient = require("../clients/mail-client");
 
-function generateMailBody(mailData){
+function generateMailBody(mailData) {
   return `
     <div style="margin: auto; width: 100%; text-align: center">
         <img src="https://winkel-app.herokuapp.com/images/logo.png" height="50px" width="50px">
@@ -23,8 +23,9 @@ function generateMailBody(mailData){
     
     `;
 }
-module.exports.sendResetPasswordMail = (mailData, callback)=>{
-  mailData.url = process.env.URL + mailData.token;
+
+module.exports.sendResetPasswordMail = (mailData, callback) => {
+  mailData.url = process.env.URL + "reset-password/" + mailData.token;
   console.log(mailData.token);
   mailData.title = "Password Reset";
   mailData.contentTitle = "Forgot your Password?";
@@ -34,12 +35,12 @@ module.exports.sendResetPasswordMail = (mailData, callback)=>{
       from: 'Winkel <support@winkel.com>',
       to: mailData.emailID,
       subject: "Reset Password",
-      html:  generateMailBody(mailData),
+      html: generateMailBody(mailData),
     }, callback);
 }
 
-module.exports.sendEmailIdVerificationMail = (mailData, callback)=>{
-  mailData.url = process.env.URL  + mailData.token;
+module.exports.sendEmailIdVerificationMail = (mailData, callback) => {
+  mailData.url = process.env.URL + "email-verification/" + mailData.token;
   console.log(mailData.token);
   mailData.title = "Thank You for signing up";
   mailData.contentTitle = "Welcome to Winkel";
@@ -49,6 +50,6 @@ module.exports.sendEmailIdVerificationMail = (mailData, callback)=>{
       from: 'Winkel <support@winkel.com>',
       to: mailData.emailID,
       subject: "Verify your email address",
-      html:  generateMailBody(mailData),
+      html: generateMailBody(mailData),
     }, callback);
 }
