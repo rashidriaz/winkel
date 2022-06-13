@@ -48,7 +48,7 @@ app.use(session({
 app.use(FetchSessionUser);
 app.use(FileUpload());
 app.use(Flash());
-app.use(Helmet());
+app.use(Helmet({contentSecurityPolicy: false,}));
 app.use(Compression());
 app.use(Express.static(path.join(__dirname, 'src/public')));
 app.use(Express.static(path.join(__dirname, 'images')));
