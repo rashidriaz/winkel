@@ -1,5 +1,6 @@
 const UserService = require("../services/modal-service/user-service");
 const ProductService = require("../services/modal-service/product-service");
+const {request} = require("express");
 
 function isAuth(session) {
   return session.isLoggedIn;
@@ -28,11 +29,12 @@ module.exports.isEmailVerified = async (request, response, next) => {
     request.flash("error", "Incorrect Email or Password");
     return response.redirect("/login")
   }
-  if (user.emailVerified) {
-    return next();
-  }
-  request.flash("error", "Email address not verified. Please verify your email address before you try to login");
-  response.redirect("/login");
+  // if (user.emailVerified) {
+  //   return next();
+  // }
+  // // request.flash("error", "Email address not verified. Please verify your email address before you try to login");
+  // // response.redirect("/login");
+  next();
 
 }
 
@@ -66,4 +68,13 @@ module.exports.checkPasswordLength = (request, response, next) => {
     return response.redirect("/signup");
   }
   next();
+}
+module.exports.isValidUsername = (request, response, next)=>{
+  const name = request.body.name;
+  if (/^[a-zA-Z]+$/.test(name)){
+    return next();
+  }else{
+    request.flash("error", "Invalid value in name field");
+    return response.redirect("/signup");
+  }
 }

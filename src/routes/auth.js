@@ -15,14 +15,14 @@ router.get("/reset-password/:token", LogoutUser, authGetController.getNewPasswor
 
 router.get("/email-verification/:token", LogoutUser, authGetController.getEmailVerificationPage);
 
-router.post("/login",auth.isNotAuthenticated, auth.isEmailVerified, authPostController.postLogin);
+router.post("/login", auth.isNotAuthenticated, auth.isEmailVerified, authPostController.postLogin);
 
-router.post("/signup",auth.isNotAuthenticated, auth.checkConfirmPassword,
+router.post("/signup", auth.isNotAuthenticated, auth.isValidUsername, auth.checkPasswordLength,
   auth.checkConfirmPassword, auth.emailAlreadyExists, authPostController.postSignup);
 
-router.post("/forget-password",auth.isNotAuthenticated, authPostController.postForgetPassword);
+router.post("/forget-password", auth.isNotAuthenticated, authPostController.postForgetPassword);
 
-router.post("/new-password",LogoutUser,auth.checkConfirmPassword, authPostController.postNewPassword);
+router.post("/new-password", LogoutUser, auth.checkConfirmPassword, authPostController.postNewPassword);
 
 router.post("/logout", authPostController.postLogout);
 
