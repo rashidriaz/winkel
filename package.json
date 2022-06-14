@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "URL=https://winkel-app.herokuapp.com/ MONGO_USER=rashidriaz MONGO_PASSWORD=1passwordhai MONGO_DEFAULT_DB=winkel MAIL_CLIENT_API_KEY=54f8758b83eabb54c59db7ca3840c9ff-50f43e91-06f219e7 MAIL_CLIENT_DOMAIN=sandbox25410413ec16415682d7a47654cc9f64.mailgun.org node app.js",
     "start-server": "node app.js",
+    "start": "node app.js",
     "start:dev": "nodemon app.js"
   },
   "repository": {
